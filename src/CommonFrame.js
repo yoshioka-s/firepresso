@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Header from './Header';
+import Sidebar from './Sidebar';
 
 const styles = theme => ({
   root: {
@@ -21,7 +22,7 @@ const styles = theme => ({
 });
 
 function CommonFramme(props) {
-  const { classes, user } = props;
+  const { classes, user, db } = props;
   return (
     <React.Fragment>
       <Header user={user} />
@@ -29,6 +30,7 @@ function CommonFramme(props) {
         <Grid item className={ classes.main }>
           { props.children }
         </Grid>
+        <Sidebar db={db} user={user}></Sidebar>
       </Grid>
     </React.Fragment>
   );

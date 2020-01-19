@@ -33,7 +33,7 @@ function Home(props) {
     </Grid>
   );
   return (
-    <CommonFrame user={user}>
+    <CommonFrame user={user} db={db}>
       { user ? articles : message }
     </CommonFrame>
   );

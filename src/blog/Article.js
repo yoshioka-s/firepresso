@@ -79,7 +79,7 @@ function Article(props) {
   }
   const updateSection = async (resourceId, index, markdown, raw) => {
     await refArticle.collection("sections").doc(resourceId).set({
-      markdown, 
+      markdown,
       raw
     }, {merge:true})
 
@@ -122,7 +122,7 @@ function Article(props) {
   const context = { pathArticle:refArticle.path };
 
   return (
-    <CommonFrame user={user}>
+    <CommonFrame user={user} db={db}>
       <div className={frameClass}>
         <Grid container>
           <Grid item xs={canEdit ? 11 : 12}>
@@ -131,7 +131,7 @@ function Article(props) {
             </Typography>
           </Grid>
           {
-            canEdit && 
+            canEdit &&
             <Grid item xs={1}>
               <IconButton size="small" onClick={toggleReadOnly}>
                 <EditIcon />
@@ -140,15 +140,15 @@ function Article(props) {
           }
         </Grid>
         {
-          editMode && 
+          editMode &&
           <BlogSection index={ 0 } resource={{}} saveSection={insertSection} insertImage={insertImage} {...context} />
         }
         {
           article.sections.map((sectionId, index)=>{
             return <div key={sectionId}>
-              <BlogSection index={ index } sectionId={sectionId} resource={ sections[sectionId] } 
-                  saveSection={updateSection} deleteSection={deleteSection} 
-                  insertImage={insertImage} onImageUpload={onImageUpload} 
+              <BlogSection index={ index } sectionId={sectionId} resource={ sections[sectionId] }
+                  saveSection={updateSection} deleteSection={deleteSection}
+                  insertImage={insertImage} onImageUpload={onImageUpload}
                   readOnly={!editMode} {...context} />
               { editMode && <BlogSection index={ index+1 } resource={{}}
                   insertImage={insertImage} saveSection={insertSection} {...context} /> }
